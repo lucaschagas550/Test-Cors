@@ -7,10 +7,18 @@
 </head>
 <body>
     
-    <button id="fetchData">Buscar</button>
+    <button id="fetchData">Buscar-0</button>
     <div id="result">
         <!-- O resultado será inserido aqui -->
     </div>
+	
+	<div>
+		<button id="fetchData1">Buscar-1</button>
+	</div>
+	
+	<div>
+		<button id="fetchData2">Assas-2</button>
+	</div>
 
     <script>
         $(document).ready(function() {
@@ -20,7 +28,7 @@
                     type: 'GET',
                     success: function(response) {
 						console.log(response)
-						console.log('sucesso')
+						console.log('sucesso-0')
                         <!-- var htmlContent = `<p>ID: ${response.id}</p> -->
                                            <!-- <p>Nome: ${response.nome}</p> -->
                                            <!-- <p>Preço: ${response.preco}</p> -->
@@ -29,12 +37,54 @@
                         <!-- $("#result").html(htmlContent); -->
                     },
                     error: function(error) {
-                        console.log("Ocorreu um erro:", error);
+                        console.log("Ocorreu um erro-0:", error);
                     }
                 });
             });
+			
+			 $("#fetchData1").click(function() {
+                $.ajax({
+                    url: 'https://localhost:7073/api/HealthCheck/Test',
+                    type: 'GET',
+                    success: function(response) {
+						console.log(response)
+						console.log('sucesso-1')
+                    },
+                    error: function(error) {
+                        console.log("Ocorreu um erro-1:", error);
+                    }
+                });
+            });
+			
+			 $("#fetchData2").click(function() {
+                $.ajax({
+                    url: 'https://localhost:7073/api/Subscriber/asaas/event',
+                    type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify({
+						"id": "evt_05b708f961d739ea7eba7e4db318f621&368604920",
+						"event": "PAYMENT_REFUNDED",
+						"payment": {
+							"id": "pay_dmql8zegnr8lnz1m",
+							"customer": "cus_000005903953",
+							"externalReference": "4f271ed0-aa0f-4a80-859b-53245a93d350",
+							"billingType": "CREDIT_CARD",
+							"transactionReceiptUrl": "www.test"
+						}
+					}),
+                    success: function(response) {
+						console.log(response)
+						console.log('sucesso-2')
+                    },
+                    error: function(error) {
+                        console.log("Ocorreu um erro-2:", error);
+                    }
+                });
+            });			
+			
         });
     </script>
+		
 
 </body>
 </html>
